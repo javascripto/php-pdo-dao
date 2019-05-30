@@ -25,6 +25,10 @@ class ProdutoDAO
 		$stmt = Conexao::getConexao()->prepare($sql);
 		$stmt->execute();
 
+		if (!$stmt->rowCount()) {
+			return [];
+		}
+
 		return array_map(function ($tuple) {
 			extract($tuple);
 			return (new Produto())
